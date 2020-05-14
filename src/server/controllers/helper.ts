@@ -65,7 +65,7 @@ export const createNewCustomer = (attempt) => {
         weeklyAmount: attemptAmount,
         loadIds: [attempt.id],
         lastTransInfo: {
-            date: attempt.time,
+            time: attempt.time,
             dailyLoad: 1,
             dailyAmount: attemptAmount,
         }
@@ -82,7 +82,7 @@ export const updateCustomerInfo = (oldInfo, attempt, oldDailyLoad) => {
     oldInfo.weeklyAmount = oldInfo.weeklyAmount + attemptAmount;
     oldInfo.loadIds.push(attempt.id);
     oldInfo.lastTransInfo = {
-        date: attempt.time,
+        time: attempt.time,
         dailyLoad: totalDailyLoad,
         dailyAmount: totalDailyAmount,
     }
@@ -100,7 +100,7 @@ export const updateCustomer = (prevInfo, attempt) => {
     const prevTransInfo = prevInfo.lastTransInfo;
 
     const attemptGMT = attempt.time;
-    const prevGMT = prevTransInfo.date;
+    const prevGMT = prevTransInfo.time;
     const attemptTimeDate = attemptGMT.substring(0, 10);
     const prevTimeDate = prevGMT.substring(0, 10);
 
