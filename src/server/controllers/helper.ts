@@ -73,11 +73,11 @@ export const createNewCustomer = (attempt) => {
     return customer;
 }
 
-export const updateCustomerInfo = (oldInfo, attempt) => {
+export const updateCustomerInfo = (oldInfo, attempt, oldDailyLoad) => {
     const attemptAmount = formatAmount(attempt.load_amount);
 
     const totalDailyLoad = oldInfo.lastTransInfo.dailyLoad + 1
-    const totalDailyAmount = oldInfo.lastTransInfo.dailyAmount + attemptAmount
+    const totalDailyAmount = oldDailyLoad + attemptAmount
 
     oldInfo.weeklyAmount = oldInfo.weeklyAmount + attemptAmount;
     oldInfo.loadIds.push(attempt.id);
@@ -110,7 +110,7 @@ export const updateCustomer = (prevInfo, attempt) => {
 
     //new dailyLoad if attempt day !== last transaction date, update info
     if (attemptTimeDate !== prevTimeDate) {
-        updatedCustomer = updateCustomerInfo(prevInfo, attempt)
+        updatedCustomer = updateCustomerInfo(prevInfo, attempt, 0)
         return updatedCustomer
     }
 
@@ -120,7 +120,7 @@ export const updateCustomer = (prevInfo, attempt) => {
         //check if dailyamount > 5K
         if (prevTransInfo.dailyAmount + attemptAmount > 5000) return null;
         // < 5k
-        updatedCustomer = updateCustomerInfo(prevInfo, attempt)
+        updatedCustomer = updateCustomerInfo(prevInfo, attempt, prevInfo.lastTransInfo.dailyAmount)
     }
 
     return updatedCustomer
