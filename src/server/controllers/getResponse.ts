@@ -49,6 +49,8 @@ export const getTransResponse = (transactions) => {
             weeklyInfo.customers[customerId] = updatedCustomer
             return result.push(validTrans(loadId, customerId));
         }
+
+        return;
     })
     return result
 }
