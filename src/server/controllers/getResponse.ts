@@ -8,12 +8,48 @@ import {
     updateCustomer
 } from './helper';
 
-export const getTransResponse = (transactions) => {
 
-    let result = []
-    let weeklyInfo;
+interface Attempt {
+    id: string;
+    customer_id: string;
+    load_amount: string;
+    time: string
+};
 
-    transactions.forEach((attempt) => {
+type Transactions = Array<Attempt>;
+
+interface TransResult {
+    id: string;
+    customer_id: string;
+    accepted: boolean
+}[];
+
+interface CustomerInfo {
+    weeklyAmount: number,
+    loadIds: Array<string> | [],
+    lastTransInfo: {
+        time: string,
+        dailyLoad: number,
+        dailyAmount: number,
+    }
+};
+
+interface Customer {
+    [customer_id: string] : CustomerInfo
+};
+
+interface WeeklyInfo {
+    start: string;
+    end: string;
+    customers: Customer;
+};
+
+export const getTransResponse = (transactions : Transactions) => {
+
+    let result: TransResult[] = []
+    let weeklyInfo : WeeklyInfo;
+
+    transactions.forEach( (attempt) => {
         if (!attempt) return null;
 
         const weekRange = getWeekRange(attempt.time);
@@ -45,7 +81,7 @@ export const getTransResponse = (transactions) => {
         if (weeklyInfo.customers[customerId]) {
             const updatedCustomer = updateCustomer(weeklyInfo.customers[customerId], attempt)
             if (updatedCustomer === null) return result.push(invalidTrans(loadId, customerId));
-
+            
             weeklyInfo.customers[customerId] = updatedCustomer
             return result.push(validTrans(loadId, customerId));
         }
