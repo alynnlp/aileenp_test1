@@ -37,19 +37,19 @@ export const isThisWeek = (givenTime, weekEnd) => {
     return true;
 }
 
-export const invalidTrans = (id, customerId) => {
+export const invalidTrans = (id, customer_id) => {
     return {
-        "id": id,
-        "customer_id": customerId,
-        "accepted": false
+        id,
+        customer_id,
+        accepted: false
     }
 }
 
-export const validTrans = (id, customerId) => {
+export const validTrans = (id, customer_id) => {
     return {
-        "id": id,
-        "customer_id": customerId,
-        "accepted": true
+        id,
+        customer_id,
+        accepted: true
     }
 }
 export const formatAmount = (amount) => {
