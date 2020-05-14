@@ -11,11 +11,37 @@ export interface OutputInterface {
   accepted: boolean;
 }
 
-export interface WeeklyInfoInterface {
-  startDate: string;
-  endDate: string;
-}
+export interface Attempt {
+  id: string;
+  customer_id: string;
+  load_amount: string;
+  time: string
+};
 
-export interface FormattedTimeStamp { 
-  timestamp: string;
-}
+export type Transactions = Array<Attempt>;
+
+export interface TransResult {
+  id: string;
+  customer_id: string;
+  accepted: boolean
+}[];
+
+export interface CustomerInfo {
+  weeklyAmount: number,
+  loadIds: Array<string> | [],
+  lastTransInfo: {
+      time: string,
+      dailyLoad: number,
+      dailyAmount: number,
+  }
+};
+
+export interface Customer {
+  [customer_id: string] : CustomerInfo
+};
+
+export interface WeeklyInfo {
+  start: string;
+  end: string;
+  customers: Customer | object;
+};
