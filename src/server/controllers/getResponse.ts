@@ -8,46 +8,15 @@ import {
     updateCustomer
 } from './helper';
 
+import {
+    InputInterface,
+    OutputInterface,
+} from '../models/types';
 
-interface Attempt {
-    id: string;
-    customer_id: string;
-    load_amount: string;
-    time: string
-};
+export const getTransResponse = (transactions : InputInterface[]) => {
 
-type Transactions = Array<Attempt>;
-
-interface TransResult {
-    id: string;
-    customer_id: string;
-    accepted: boolean
-}[];
-
-interface CustomerInfo {
-    weeklyAmount: number,
-    loadIds: Array<string> | [],
-    lastTransInfo: {
-        time: string,
-        dailyLoad: number,
-        dailyAmount: number,
-    }
-};
-
-interface Customer {
-    [customer_id: string] : CustomerInfo
-};
-
-interface WeeklyInfo {
-    start: string;
-    end: string;
-    customers: Customer;
-};
-
-export const getTransResponse = (transactions : Transactions) => {
-
-    let result: TransResult[] = []
-    let weeklyInfo : WeeklyInfo;
+    let result: OutputInterface[] = []
+    let weeklyInfo : any;
 
     transactions.forEach( (attempt) => {
         if (!attempt) return null;
