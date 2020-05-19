@@ -6,6 +6,7 @@ import {
     validTrans,
     createNewCustomer,
     updateCustomer
+    //@ts-ignore
 } from './helper';
 
 import {

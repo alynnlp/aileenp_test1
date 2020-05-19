@@ -64,7 +64,7 @@ export class LoadFundsController {
     logger.info('Filtering data', { data });
 
     let response = getTransResponse(data);
-
+    //@ts-ignore
     result.push(response)   
   
     logger.info('Successfully filtered data', { result });
