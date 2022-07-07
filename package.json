@@ -52,7 +52,7 @@
     "extend": "^3.0.2",
     "helmet": "^3.21.2",
     "inversify": "^5.0.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
     "reflect-metadata": "^0.1.13",
